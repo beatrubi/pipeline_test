@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    name: Builr RPM package from source
+    name: Build RPM package from source
     runs-on: ubuntu-latest
 
     steps:
