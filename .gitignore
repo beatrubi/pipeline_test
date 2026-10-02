@@ -1,0 +1,13 @@
+*~
+.DS_Store
+._*
+*.dSYM
+hello
+/hello-*
+/hello_*
+/BUILD/
+/BUILDROOT/
+/RPMS/
+/SOURCES/
+/SPECS/
+/SRPMS/
