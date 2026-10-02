@@ -1,14 +1,15 @@
 name: Create RPM
 
-on: [pull_request]
-
+on:
+  pull_request:
+    branches: [ "main" ]
 
 #permissions:
 #  contents: write
 
 jobs:
   build:
-    name: Build RPM package from source
+    name: Build RPM from source
     runs-on: ubuntu-latest
 
     steps:
@@ -39,8 +40,7 @@ jobs:
   release:
    name: Push binary & rpm to releases
    needs:
-     - build_tar
-     - build_rpm
+     - build
    runs-on: ubuntu-latest
    steps:
      - name: Download all artifacts
@@ -58,5 +58,4 @@ jobs:
          gh release create latest release-files/*.tar.gz release-files/*.rpm \
            --repo "${{ github.repository }}" \
            --title "Latest Build" \
-            --notes "Rolling release automatically updated on push to main (${{ github.sha }})."
-
+           --notes "Rolling release automatically updated on push to main (${{ github.sha }})."
