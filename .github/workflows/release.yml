@@ -8,7 +8,7 @@ on: [pull_request]
 
 jobs:
   build:
-    name: Build RPM package from source
+    name: build_rpm
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +39,6 @@ jobs:
    release:
     name: Push binary & rpm to releases
     needs:
-      - build_tar
       - build_rpm
     runs-on: ubuntu-latest
     steps:
