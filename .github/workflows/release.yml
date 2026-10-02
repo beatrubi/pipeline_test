@@ -2,6 +2,10 @@ name: Create RPM
 
 on: [pull_request]
 
+
+#permissions:
+#  contents: write
+
 jobs:
   build:
     name: Build RPM package from source
