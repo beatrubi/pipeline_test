@@ -8,7 +8,7 @@ on: [pull_request]
 
 jobs:
   build:
-    name: build_rpm
+    name: Build RPM from source
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +39,7 @@ jobs:
   release:
    name: Push binary & rpm to releases
    needs:
-     - build_rpm
+     - build
    runs-on: ubuntu-latest
    steps:
      - name: Download all artifacts
