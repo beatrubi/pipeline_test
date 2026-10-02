@@ -36,26 +36,25 @@ jobs:
           name: hello-1.0-1.x86_64.rpm
           path: RPMS/x86_64/hello-1.0-1.x86_64.rpm
 
-   release:
-    name: Push binary & rpm to releases
-    needs:
-      - build_rpm
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: release-files
-          merge-multiple: true
-      - name: Push rpm & binary
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          tag_name: "v1.0.1"
-        run: |
-          gh release delete latest --yes --repo "${{ github.repository }}" || true
-          gh api -X DELETE "repos/${{ github.repository }}/git/refs/tags/latest" || true
-          gh release create latest release-files/*.tar.gz release-files/*.rpm \
-            --repo "${{ github.repository }}" \
-            --title "Latest Build" \
-            --notes "Rolling release automatically updated on push to main (${{ github.sha }})."
-
+  release:
+   name: Push binary & rpm to releases
+   needs:
+     - build_rpm
+   runs-on: ubuntu-latest
+   steps:
+     - name: Download all artifacts
+       uses: actions/download-artifact@v4
+       with:
+         path: release-files
+         merge-multiple: true
+     - name: Push rpm & binary
+       env:
+         GITHUB_TOKEN: ${{ secrets.TOKEN }}
+         tag_name: "v1.0.1"
+       run: |
+         gh release delete latest --yes --repo "${{ github.repository }}" || true
+         gh api -X DELETE "repos/${{ github.repository }}/git/refs/tags/latest" || true
+         gh release create latest release-files/*.tar.gz release-files/*.rpm \
+           --repo "${{ github.repository }}" \
+           --title "Latest Build" \
+           --notes "Rolling release automatically updated on push to main (${{ github.sha }})."
