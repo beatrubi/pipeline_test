@@ -15,11 +15,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
 
-#      - name: Install RPM build tools
-#        run: |
-#          sudo apt-get update
-#          sudo apt-get install -y build-essential rpm elfutils file
-
       - name: Prep environment
         run: |
           mkdir -p hello-1.0 SOURCES SPECS
@@ -33,5 +28,7 @@ jobs:
       - name: Upload RPM artifact
         uses: actions/upload-artifact@v7
         with:
-          name: hello-1.0-1.x86_64.rpm
-          path: RPMS/x86_64/hello-1.0-1.x86_64.rpm
+          name: RPMS
+          path: |
+            RPMS/*/*.rpm
+            SRPMS/*.rpm
