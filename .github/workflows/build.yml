@@ -23,7 +23,9 @@ jobs:
           cp hello.spec SPECS/
 
       - name: Build RPM
-        run: rpmbuild -ba --clean --define "_topdir ${PWD}" SPECS/hello.spec
+        run: |
+          sudo dnf builddep SPECS/hello.spec
+          rpmbuild -ba --clean --define "_topdir ${PWD}" SPECS/hello.spec
 
       - name: Upload RPM artifact
         uses: actions/upload-artifact@v7
