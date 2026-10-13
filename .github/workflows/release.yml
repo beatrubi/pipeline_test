@@ -4,7 +4,6 @@ on:
   workflow_run:
     workflows:
       - Create RPM
-    branches: [main]
     types:
       - completed
 
