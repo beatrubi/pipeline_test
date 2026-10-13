@@ -46,8 +46,6 @@ jobs:
           if [ -n "$GPG_PASSPHRASE" ]; then
             echo -n "$GPG_PASSPHRASE" > /tmp/gpg_passphrase
           fi
-          mkdir -p ~/.config/rpm
-          : # cat << EOF > ~/.config/rpm/macros
           cat << EOF > ~/.rpmmacros
           %_signature gpg
           %_gpg_path ~/.gnupg
@@ -56,7 +54,6 @@ jobs:
           %_gpg_name Name %{_openpgp_sign_id}
           %__gpg_sign_cmd %{_gpgbin} --batch --no-tty --pinentry-mode loopback --passphrase-file "/tmp/gpg_passphrase" --no-verbose --no-armor -s -b -o %{__signature_filename} %{__plaintext_filename}
           EOF
-          : # cp ~/.config/rpm/macros ~/.rpmmacros
           rpmsign --addsign RPMS/*/*.rpm
           
           rm -f /tmp/gpg_passphrase
