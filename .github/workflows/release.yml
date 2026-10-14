@@ -1,4 +1,4 @@
-name: Publish RPM
+name: Release RPM to GitHub
 
 on:
   workflow_run:
@@ -8,22 +8,26 @@ on:
       - completed
 
 env:
-  GITHUB_TOKEN: ${{ secrets.TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   release:
     name: Push binary & rpm to releases
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
     steps:
       - name: Download all artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: release-files
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Push rpm & binary
-        run: | 
+        run: |
           ls release-files/RPMS/*
           ls release-files/RPMS/*/*
           gh release delete latest --yes --repo "${{ github.repository }}" || true

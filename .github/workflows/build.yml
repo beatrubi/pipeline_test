@@ -31,7 +31,7 @@ jobs:
       - name: Build RPM
         run: |
           sudo dnf builddep SPECS/$package_name.spec
-          rpmbuild -bb --clean --define "_topdir ${PWD}" SPECS/$package_name.spec
+          rpmbuild -ba --clean --define "_topdir ${PWD}" SPECS/$package_name.spec
 
       - name: Sign RPM
         env:
@@ -54,16 +54,18 @@ jobs:
           %_gpg_name Name %{_openpgp_sign_id}
           %__gpg_sign_cmd %{_gpgbin} --batch --no-tty --pinentry-mode loopback --passphrase-file "/tmp/gpg_passphrase" --no-verbose --no-armor -s -b -o %{__signature_filename} %{__plaintext_filename}
           EOF
-          rpmsign --addsign RPMS/*/*.rpm
+          rpmsign --addsign RPMS/*/*.rpm SRPMS/*.rpm
           
           rm -f /tmp/gpg_passphrase
 
       - name: Verify Signed RPM Metadata
         run: |
-          rpm -Kv RPMS/*/*.rpm
+          rpm -Kv RPMS/*/*.rpm SRPMS/*.rpm
 
       - name: Upload RPM artifact
         uses: actions/upload-artifact@v7
         with:
           name: RPMS
-          path: RPMS/*/*.rpm
+          path: |
+            RPMS/*/*.rpm
+            SRPMS/*.rpm
