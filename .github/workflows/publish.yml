@@ -8,7 +8,7 @@ on:
       - completed
 
 jobs:
-  release:
+  publish:
     name: Upload RPMs
     runs-on: ubuntu-latest
     container: ghcr.io/beatrubi/hammer/hammer:latest
@@ -26,6 +26,7 @@ jobs:
           SAT_USER: ${{ secrets.SAT_USER }}
           SAT_PASS: ${{ secrets.SAT_PASS }}
         run: |
+          ls -lR
           hammer -s $SAT_HOST -u $SAT_USER -p $SAT_PASS repository \
           upload-content --organization Default --product Custom --name el9 --path 'RPMS/*/*.rpm'
           hammer -s $SAT_HOST -u $SAT_USER -p $SAT_PASS repository \
