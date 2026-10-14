@@ -14,6 +14,11 @@ jobs:
   release:
     name: Push binary & rpm to releases
     runs-on: ubuntu-latest
+
+    permissions:
+      packages: write
+      contents: read
+
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
