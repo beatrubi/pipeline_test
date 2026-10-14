@@ -34,3 +34,11 @@ gpg --export --armor "Package Pipeline Test <support@adfinis.com>"
 
 This one is needed to validate the packages.
 
+## Package upload to Foreman/Katello
+
+The upload is performed by the [hammer](https://github.com/beatrubi/hammer) container. To do so, define three secrets:
+
+* Name `SAT_HOST` with the base URI of Foreman/Katello
+* Name `SAT_USER` with the user attached to the [upload role](https://github.com/beatrubi/hammer/blob/master/assets/Bildschirmfoto%202026-10-14%20um%2012.30.44.png)
+* Name `SAT_PASS` with its password
+
