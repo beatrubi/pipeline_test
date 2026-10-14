@@ -66,4 +66,6 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: RPMS
-          path: RPMS/*/*.rpm
+          path: |
+            RPMS/*/*.rpm
+            SRPMS/*.rpm
