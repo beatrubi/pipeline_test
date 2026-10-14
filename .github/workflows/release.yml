@@ -28,7 +28,6 @@ jobs:
           
       - name: Push rpm & binary
         run: |
-          ls -lR
           ls release-files/RPMS/*
           ls release-files/RPMS/*/*
           gh release delete latest --yes --repo "${{ github.repository }}" || true
