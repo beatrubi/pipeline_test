@@ -30,4 +30,4 @@ jobs:
           hammer -s $SAT_HOST -u $SAT_USER -p $SAT_PASS repository \
           upload-content --organization Default --product Custom --name el9 --path 'RPMS/*/*.rpm'
           hammer -s $SAT_HOST -u $SAT_USER -p $SAT_PASS repository \
-          upload-content --organization Default --product Custom --name el9 --path 'SPMS/*.rpm'
+          upload-content --organization Default --product Custom --name el9 --content-type srpm --path 'SPMS/*.rpm'
