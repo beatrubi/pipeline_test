@@ -23,7 +23,6 @@ jobs:
           mkdir -p $package_name-$version SOURCES SPECS
           cp Makefile $package_name.c $package_name-$version/
           
-          : # "tar" not necessary in final version, as it will be already provivded
           tar cvfz SOURCES/$package_name-$version.tar.gz $package_name-$version
           
           cp $package_name.spec SPECS/
