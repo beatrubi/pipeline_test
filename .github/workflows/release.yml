@@ -19,6 +19,7 @@ jobs:
         with:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          merge-multiple: true
           
       - name: Sign RPM
         env:
